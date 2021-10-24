@@ -17,7 +17,8 @@ class ViewController: UIViewController, WKNavigationDelegate {
     var progressView: UIProgressView!
     
     // Safe list of web sites
-    var websites = ["google.com", "apple.com", "mail.ru"]
+    var websites = ["disney.ru", "kiddle.co", "factmonster.com", "apple.com", "youtubekids.com"]
+    var selectedSite: String?
     
     override func loadView() {
         
@@ -59,7 +60,7 @@ class ViewController: UIViewController, WKNavigationDelegate {
         webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
         
         // Starting page
-        let url = URL(string: "https://\(websites[0])")!
+        let url = URL(string: "https://\(selectedSite!)")!
         webView.load(URLRequest(url: url))
         webView.allowsBackForwardNavigationGestures = true
     }
@@ -91,7 +92,7 @@ class ViewController: UIViewController, WKNavigationDelegate {
     
     // Update Nav title
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        title = "Easy Browser: " + "\(webView.title ?? "")"
+        title = "\(webView.title ?? "")"
     }
     
     // Adds KVO (key value observer) for estimatedProgress
