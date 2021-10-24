@@ -46,7 +46,11 @@ class ViewController: UIViewController, WKNavigationDelegate {
         progressView.sizeToFit()
         let progressButton = UIBarButtonItem(customView: progressView)
         
-        toolbarItems = [progressButton, spacer, refresh]
+        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: webView, action: #selector(webView.goBack))
+        
+        let forwardButton = UIBarButtonItem(title: "Forward", style: .plain, target: webView, action: #selector(webView.goForward))
+        
+        toolbarItems = [progressButton, spacer, backButton, forwardButton, refresh]
         
         // shows toolbar at bottom
         navigationController?.isToolbarHidden = false
@@ -117,6 +121,8 @@ class ViewController: UIViewController, WKNavigationDelegate {
             }
         }
         // else cancel loading
+        
+        title = "BLOCKED!!!"
         decisionHandler(.cancel)
     }
     
